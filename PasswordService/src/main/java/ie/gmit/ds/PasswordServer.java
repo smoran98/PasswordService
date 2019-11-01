@@ -1,8 +1,6 @@
 package ie.gmit.ds;
 
-import ie.gmit.ds.PasswordServiceImpl;
 import io.grpc.Server;
-
 import io.grpc.ServerBuilder;
 
 import java.io.IOException;
@@ -23,7 +21,7 @@ public class PasswordServer {
 
     private void start() throws IOException {
         // Port server should run
-        int port = 50551;
+        int port = 2104;
         server = ServerBuilder.forPort(port)
                 .addService(new PasswordServiceImpl())
                 .build()
