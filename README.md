@@ -28,3 +28,10 @@ Name: Shane Moran
 URL: https://github.com/smoran98/PasswordService
 Email: G00338607@gmit.ie
 ```
+
+**References**
+```
+https://github.com/john-french/distributed-systems-labs
+https://github.com/john-french/artistAPI-dropwizard
+https://howtodoinjava.com/dropwizard/tutorial-and-hello-world-example/
+```

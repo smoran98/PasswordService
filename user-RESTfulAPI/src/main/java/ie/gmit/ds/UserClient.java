@@ -19,7 +19,7 @@ public class UserClient{
     private static UserClient instance;
     private UserClient (){
         channel = ManagedChannelBuilder
-                .forAddress("localhost", 50551)
+                .forAddress("localhost", 2104)
                 .usePlaintext()
                 .build();
         syncPasswordService = PasswordServiceGrpc.newBlockingStub(channel);
@@ -51,25 +51,11 @@ public class UserClient{
     private int userId;
 
 
-    // public UserClient(String host, int port) {
-    //     channel = ManagedChannelBuilder
-    //             .forAddress(host, port)
-    //             .usePlaintext()
-    //             .build();
-    //     syncPasswordService = PasswordServiceGrpc.newBlockingStub(channel);
-    //     asyncPasswordService = PasswordServiceGrpc.newStub(channel);
-    // }
-
     public void shutdown() throws InterruptedException {
         channel.shutdown().awaitTermination(5, TimeUnit.SECONDS);
     }
 
-    // public void getUserInput(){
-    //     System.out.println("Enter ID:");
-    //     userId = userInput.nextInt();
-    //     System.out.println("Enter Password:");
-    //     userPassword = userInput.next();
-    // }
+
 
     public HashResult sendHashRequest(int userId, String userPassword){
         // getUserInput();
