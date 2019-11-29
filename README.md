@@ -1,6 +1,4 @@
-# PasswordService
-
-**Distributed Systems Project**
+# Distributed Systems Project**
 ```
 Overview
 The purpose of this project is to gain practical experience in interprocess communication
@@ -12,8 +10,13 @@ submitted separately. The two interconnected services you’ll develop are as fo
 • Part 1: gRPC Password service
 • Part 2: RESTful User Account Service
 ```
+
+# PasswordService
 **Run the Jar file**
 ```
+mvn compile
+
+cd target
 run java -jar PasswordService.jar
 ```
 
@@ -21,6 +24,19 @@ run java -jar PasswordService.jar
 ```
 Once the .jar file is ran, it should be listening on port 2104
 ```
+
+
+# user-RESTfulAPI
+**Run the jar file**
+```
+mvn package
+
+run java -jar user-RESTfulAPI-1.0-SNAPSHOT.jar server userAPIconfig.yml
+```
+
+**Swaggerhub**
+https://app.swaggerhub.com/apis/SMoran985/UserAPI/1#free
+
 
 **Name,URL and EMail**
 ```
