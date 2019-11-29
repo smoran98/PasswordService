@@ -1,4 +1,4 @@
-# Distributed Systems Project**
+# Distributed Systems Project
 ```
 Overview
 The purpose of this project is to gain practical experience in interprocess communication
