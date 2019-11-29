@@ -17,7 +17,7 @@ import ie.gmit.ds.PasswordServiceGrpc;
 public class UserClient{
 
     private static UserClient instance;
-    private UserClient (){
+    public UserClient (){
         channel = ManagedChannelBuilder
                 .forAddress("localhost", 2104)
                 .usePlaintext()

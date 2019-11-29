@@ -2,6 +2,7 @@ package ie.gmit.ds;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.protobuf.ByteString;
 
 import javax.validation.constraints.NotNull;
 
@@ -23,11 +24,13 @@ public class User {
     public User(){}
 
     // Add New Account
-    public User(int userID, String userName, String email, String password) {
+    public User(int userID, String userName, String email, String password, byte[] hash, byte[] sa) {
         this.userID = userID;
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.hashedPassword = hash;
+        this.salt = sa;
     }
 
     // login user

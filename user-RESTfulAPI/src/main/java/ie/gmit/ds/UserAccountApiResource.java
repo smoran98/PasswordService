@@ -15,12 +15,40 @@ public class UserAccountApiResource {
     private HashMap<Integer, User> userAccounts = new HashMap<Integer, User>();
 
     public UserAccountApiResource(){
-        User testUser1 = new User(01, "qwe", "qwe@qwe.com", "qwe");
-        User testUser2 = new User(02, "asd", "asd@asd.com", "asd");
+        User testUser1 = new User(01, "qwe", "qwe@qwe.com", "qwe", null, null);
+        User testUser2 = new User(02, "asd", "asd@asd.com", "asd", null, null);
         userAccounts.put(testUser1.userID, testUser1);
         userAccounts.put(testUser2.userID, testUser2);
     }
 
+    @POST
+    @Path("login")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response loginUser(User acc) {
+        // Confirm if User Exists in DB - Not Found Error if false
+        int providedID = acc.getUserID();
+        if(userAccounts.get(providedID) == null){
+            return Response.status(Status.NOT_FOUND)
+                    .entity("Error! Please Try Again...").build();
+        }
+
+        String password = acc.getPassword();
+        User userLogin = userAccounts.get(providedID);
+        System.out.println("User "+userLogin.getUserName()+" found");
+        System.out.println("Validating... ");
+        boolean validLogin = new UserClient().validate(password, userLogin.getHashedPassword(), userLogin.getSalt());
+        System.out.println("Validate "+validLogin);
+
+        // Logged in
+        if(validLogin){
+            return Response.status(Status.OK).entity("VALID DATA").build();
+        }
+        // Try again
+        else{
+            return  Response.status(Status.BAD_REQUEST).entity("Login Error, Incorrect data, TRY AGAIN ").build();
+        }
+    }
+    
     @GET
     public Collection<User> getUsers() {
         return userAccounts.values();
@@ -38,9 +66,9 @@ public class UserAccountApiResource {
         UserClient client  = UserClient.getInstance();
         HashResult result = client.sendHashRequest(acc.getUserID(), acc.getPassword());
         System.out.println(result.getHashedPw()+""+result.getSalt());
-        //make a new user with second constructor
-        // if(userAccounts.get(acc.userID) == null){
-        // }
+        //make a new user with second constructor            
+        if(userAccounts.get(acc.userID) == null){
+        }
         userAccounts.put(acc.userID, acc);
         return Response.status(Status.CREATED).type(MediaType.TEXT_PLAIN).entity("UserAccount Created for "+acc.getUserName()+".").build();
 
