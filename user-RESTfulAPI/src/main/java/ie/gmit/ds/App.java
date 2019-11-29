@@ -13,7 +13,7 @@ public class App extends Application<Configuration> {
     @Override
     public void run(Configuration configuration, Environment environment) throws Exception {
 
-        final UserApiResource resource = new UserApiResource();
+        final UserAccountApiResource resource = new UserAccountApiResource();
 
         //HealthCheck criteria
         final UserHealthCheck healthCheck = new UserHealthCheck();

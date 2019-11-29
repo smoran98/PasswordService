@@ -62,10 +62,10 @@ public class UserClient{
 
         // Build HashRequest
         System.out.println("Sending Hash Req");
-        HashRequest hashRequest = HashRequest.newBuilder().setUserId(userId)
+        HashInput hashRequest = HashInput.newBuilder().setUserId(userId)
                                     .setPassword(userPassword).build();
         // HashResponse
-        HashResponse hashResponse;
+        HashOutput hashResponse;
 
         // try {
             hashResponse = syncPasswordService.hash(hashRequest);
@@ -78,7 +78,7 @@ public class UserClient{
     }
 
     public boolean validate(String userPassword, byte[] hashedPassword, byte[] salt){
-        return syncPasswordService.validate(ValidationRequest.newBuilder().setPassword(userPassword)
+        return syncPasswordService.validate(ValidateInput.newBuilder().setPassword(userPassword)
                     .setHashedPassword(ByteString.copyFrom(hashedPassword) )
                     .setSalt(ByteString.copyFrom(salt)).build()).getValue();
            
@@ -107,7 +107,7 @@ public class UserClient{
             }
         };
         try {
-            asyncPasswordService.validate(ValidationRequest.newBuilder().setPassword(userPassword)
+            asyncPasswordService.validate(ValidateInput.newBuilder().setPassword(userPassword)
                     .setHashedPassword(hashedPassword)
                     .setSalt(salt).build(), responseObserver);
         } catch (StatusRuntimeException ex) {

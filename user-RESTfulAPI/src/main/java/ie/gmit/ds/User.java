@@ -1,18 +1,37 @@
 package ie.gmit.ds;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.validation.constraints.NotNull;
 
 public class User {
 
+    //User Account credentials
+    @NotNull
     int userID;
+    @NotNull
     String userName;
+    @NotNull
     String email;
+    @NotNull
     String password;
 
+    byte[] hashedPassword;
+    byte[] salt;
+
     public User(){}
+
+    // Add New Account
     public User(int userID, String userName, String email, String password) {
         this.userID = userID;
         this.userName = userName;
+        this.email = email;
+        this.password = password;
+    }
+
+    // login user
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
@@ -35,5 +54,23 @@ public class User {
     @JsonProperty
     public String getPassword() {
         return password;
+    }
+
+    @JsonProperty
+    public byte[] getHashedPassword() {
+        return hashedPassword;
+    }
+
+    @JsonProperty
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setHashedPassword(byte[] hashedPassword) {
+        this.hashedPassword = hashedPassword;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 }

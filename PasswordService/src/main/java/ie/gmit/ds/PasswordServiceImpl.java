@@ -9,6 +9,7 @@ public class PasswordServiceImpl extends PasswordServiceGrpc.PasswordServiceImpl
     @Override
     public void hash(HashInput request, StreamObserver<HashOutput> responseObserver) {
 
+    	System.out.println("hashing password");
         byte[] salt = Passwords.getNextSalt();
         byte[] hashed = Passwords.hash(request.getPassword().toCharArray(), salt);
 
