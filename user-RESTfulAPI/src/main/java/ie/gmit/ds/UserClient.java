@@ -77,11 +77,11 @@ public class UserClient{
         // }
     }
 
+
     public boolean validate(String userPassword, byte[] hashedPassword, byte[] salt){
         return syncPasswordService.validate(ValidateInput.newBuilder().setPassword(userPassword)
                     .setHashedPassword(ByteString.copyFrom(hashedPassword) )
                     .setSalt(ByteString.copyFrom(salt)).build()).getValue();
-           
     }
 
     public void sendValidationRequest(){
